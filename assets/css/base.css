@@ -49,21 +49,21 @@
    synthesizes it from italic when needed). */
 @font-face {
   font-family: 'Garamond';
-  src: url('/fonts/garamond-regular.woff2') format('woff2');
+  src: url('../fonts/garamond-regular.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'Garamond';
-  src: url('/fonts/garamond-bold.woff2') format('woff2');
+  src: url('../fonts/garamond-bold.woff2') format('woff2');
   font-weight: 700;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'Garamond';
-  src: url('/fonts/garamond-italic.woff2') format('woff2');
+  src: url('../fonts/garamond-italic.woff2') format('woff2');
   font-weight: 400;
   font-style: italic;
   font-display: swap;
@@ -78,7 +78,7 @@
    the font's own license (BSD-style, notice must ship with the binary). */
 @font-face {
   font-family: '3270 Nerd Font Mono';
-  src: url('/fonts/3270-nerd-font-mono.woff2') format('woff2');
+  src: url('../fonts/3270-nerd-font-mono.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
