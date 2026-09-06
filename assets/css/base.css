@@ -27,7 +27,7 @@
      and font-style, so as long as your font file (or @font-face below)
      provides those three faces, everything downstream just works. */
   --font-body: 'Garamond', Georgia, 'Times New Roman', Times, serif;
-  --font-mono: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+  --font-mono: '3270 Nerd Font Mono', 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
 
   --weight-regular: 400;
   --weight-bold: 700;
@@ -66,6 +66,21 @@
   src: url('/fonts/garamond-italic.woff2') format('woff2');
   font-weight: 400;
   font-style: italic;
+  font-display: swap;
+}
+
+/* 3270 Nerd Font Mono for code/kbd — the "Mono" build specifically (not
+   the plain or "Propo" builds), since Nerd Fonts pad in a large block of
+   icon glyphs that only stay fixed-width in the Mono variant, matching
+   the terminal-font feel `pre`/`code` want. Only a single (regular)
+   weight ships upstream, so bold code text falls back to the browser's
+   faux-bold synthesis — see static/fonts/3270-nerd-font-LICENSE.txt for
+   the font's own license (BSD-style, notice must ship with the binary). */
+@font-face {
+  font-family: '3270 Nerd Font Mono';
+  src: url('/fonts/3270-nerd-font-mono.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
   font-display: swap;
 }
 
