@@ -1,7 +1,6 @@
 baseURL = "https://psiwray.github.io/blog/"
 locale = "en-us"
 title = "Ψray"
-theme = ""
 paginate = 10
 enableRobotsTXT = true
 summarylength = 40
