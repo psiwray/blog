@@ -22,9 +22,8 @@ body {
 /* The whole document — header, article, footer — rides above the wallpaper
    as one continuous "paper" sheet (rather than three separate panels that
    could each let the tiled trace pattern show, and coincidentally collide
-   with, running text). Corner vias bracket it like the board-edge
-   terminals the icon's own traces run to; the header/footer's own trace
-   rules become internal dividers instead of separate panel edges. */
+   with, running text). The header/footer's own trace rules become
+   internal dividers instead of separate panel edges. */
 .page {
   position: relative;
   margin: 2rem auto 3rem;
@@ -32,27 +31,6 @@ body {
   border: 1px solid var(--color-trace-soft);
   border-radius: 10px;
   box-shadow: 0 2px 16px rgba(13, 13, 13, 0.07);
-}
-
-.page::before,
-.page::after {
-  content: "";
-  position: absolute;
-  width: 11px;
-  height: 11px;
-  background: var(--color-paper);
-  border: 1.5px solid var(--color-ink);
-  border-radius: var(--radius-node);
-}
-
-.page::before {
-  top: -6px;
-  left: -6px;
-}
-
-.page::after {
-  bottom: -6px;
-  right: -6px;
 }
 
 main {

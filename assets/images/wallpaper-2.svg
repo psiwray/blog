@@ -9,6 +9,16 @@
     <path d="M180,180 L180,230 L230,230" />
     <path d="M250,250 L250,300 L300,300 L300,330" />
     <path d="M90,300 L140,300" />
+    <path d="M115,220 L115,233 M115,257 L115,270" />
+  </g>
+  <!-- Component footprints: same silkscreen-outline idea as wallpaper.svg,
+       scaled up to match this tile's larger, sparser accents — a bigger IC
+       package and a crystal/resonator's diamond footprint. -->
+  <g fill="none" stroke="#b9b9ba" stroke-width="2" stroke-linecap="round">
+    <rect x="150" y="80" width="40" height="60" />
+    <path d="M150,90 L144,90 M150,105 L144,105 M150,120 L144,120 M150,135 L144,135" />
+    <path d="M190,90 L196,90 M190,105 L196,105 M190,120 L196,120 M190,135 L196,135" />
+    <path d="M115,233 L127,245 L115,257 L103,245 Z" />
   </g>
   <g fill="none" stroke="#b9b9ba" stroke-width="1.5">
     <circle cx="40" cy="30" r="5" />
@@ -23,6 +33,8 @@
     <circle cx="300" cy="330" r="3" />
     <circle cx="150" cy="60" r="4" />
     <circle cx="90" cy="300" r="3" />
+    <circle cx="115" cy="220" r="3" />
+    <circle cx="115" cy="270" r="3" />
   </g>
   <g fill="#b9b9ba">
     <circle cx="40" cy="90" r="2" />
@@ -34,5 +46,6 @@
     <circle cx="250" cy="300" r="2" />
     <circle cx="300" cy="300" r="2" />
     <circle cx="140" cy="300" r="1.5" />
+    <circle cx="154" cy="84" r="2" />
   </g>
 </svg>

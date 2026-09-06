@@ -40,7 +40,7 @@
   --color-panel: #f5f5f5;   /* code block / inset background */
 
   /* --- Scale --- */
-  --measure: 42rem;         /* reading-column max width */
+  --measure: 54.6rem;       /* reading-column max width (42rem + 30%) */
   --radius-node: 50%;
 }
 
@@ -310,12 +310,16 @@ pre code {
   font-size: 0.85em;
 }
 
-/* corner via, echoing the icon's board-edge terminals */
+/* Corner via, echoing the icon's board-edge terminals — inset rather than
+   protruding like blockquote's/hr's own corner marks: `overflow-x: auto`
+   above forces `overflow-y` to compute as `auto` too (a spec quirk —
+   declaring only one axis non-visible drags the other out of `visible`),
+   so a negative-offset mark here would silently clip instead of showing. */
 pre::before {
   content: "";
   position: absolute;
-  top: -6px;
-  left: -6px;
+  top: 6px;
+  left: 6px;
   width: 10px;
   height: 10px;
   background: var(--color-paper);
@@ -333,6 +337,10 @@ hr {
   margin: 3.5rem 0;
   border: 0;
   background: var(--color-trace);
+  /* Browsers' UA stylesheet gives hr `overflow: hidden` by default, which
+     silently clips the via mark below (and the field annotation in
+     section 13) since both sit outside this 1px-tall box. */
+  overflow: visible;
 }
 
 hr::after {
@@ -374,6 +382,7 @@ figcaption {
    11. Tables
    -------------------------------------------------------------------------- */
 table {
+  position: relative;
   width: 100%;
   margin: 1.75em 0;
   border-collapse: collapse;
@@ -417,4 +426,64 @@ abbr[title] {
 sup a {
   text-decoration: none;
   border-bottom: 1px solid var(--color-trace-soft);
+}
+
+/* --------------------------------------------------------------------------
+   13. Field annotations — Ψ's other lives
+   -------------------------------------------------------------------------- */
+/* The mark's own Ψ isn't just a letterform — it's the standard symbol for
+   a handful of unrelated scientific concepts (a wavefunction in quantum
+   mechanics, the psyche in psychology, flux in electromagnetism, a stream
+   function in fluid dynamics). A few block elements each get a small
+   corner tag naming whichever of those concepts its own role echoes —
+   different content, one shared quiet treatment, tying the page back to
+   the mark rather than to any one field. Purely decorative: aria-hidden
+   isn't needed since ::before/::after content is already invisible to
+   assistive tech by default. */
+blockquote::after,
+pre::after,
+hr::before,
+table::before {
+  position: absolute;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-trace-soft);
+  pointer-events: none;
+}
+
+/* Sits just above the box on the three elements that don't clip overflow. */
+blockquote::after,
+hr::before,
+table::before {
+  top: -1.4em;
+  right: 0;
+}
+
+/* pre clips (see the ::before comment above), so this one sits inset
+   inside its own padding instead of hovering above the box. */
+pre::after {
+  top: 0.6em;
+  right: 0.9em;
+}
+
+/* Quoting someone else's words — the psyche behind them. */
+blockquote::after {
+  content: "Ψ · psyche";
+}
+
+/* Code describes a system's possible states — the wave function. */
+pre::after {
+  content: "Ψ · wavefunction";
+}
+
+/* A horizontal rule is a boundary; flux is defined through one. */
+hr::before {
+  content: "Ψ · flux";
+}
+
+/* A table's rows are data in motion — a stream function. */
+table::before {
+  content: "Ψ · streamfunction";
 }
