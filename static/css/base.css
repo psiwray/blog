@@ -26,7 +26,7 @@
      family; regular/bold/italic are pulled in via normal CSS font-weight
      and font-style, so as long as your font file (or @font-face below)
      provides those three faces, everything downstream just works. */
-  --font-body: Georgia, 'Times New Roman', Times, serif;
+  --font-body: 'Garamond', Georgia, 'Times New Roman', Times, serif;
   --font-mono: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
 
   --weight-regular: 400;
@@ -44,31 +44,30 @@
   --radius-node: 50%;
 }
 
-/* Optional: if/when you have real font files, wire them up here and then
-   just change --font-body above to your family name.
-
-   @font-face {
-     font-family: 'YourFont';
-     src: url('/fonts/YourFont-Regular.woff2') format('woff2');
-     font-weight: 400;
-     font-style: normal;
-     font-display: swap;
-   }
-   @font-face {
-     font-family: 'YourFont';
-     src: url('/fonts/YourFont-Bold.woff2') format('woff2');
-     font-weight: 700;
-     font-style: normal;
-     font-display: swap;
-   }
-   @font-face {
-     font-family: 'YourFont';
-     src: url('/fonts/YourFont-Italic.woff2') format('woff2');
-     font-weight: 400;
-     font-style: italic;
-     font-display: swap;
-   }
-*/
+/* Garamond, in the three faces the type scale actually uses (regular,
+   bold, italic — no bold-italic file was supplied, so the browser
+   synthesizes it from italic when needed). */
+@font-face {
+  font-family: 'Garamond';
+  src: url('/fonts/garamond-regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Garamond';
+  src: url('/fonts/garamond-bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Garamond';
+  src: url('/fonts/garamond-italic.woff2') format('woff2');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
 
 /* --------------------------------------------------------------------------
    2. Reset & base page rules
