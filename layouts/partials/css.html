@@ -1,0 +1,27 @@
+{{/* Hugo Pipes: minify + fingerprint CSS/SVG resources in production only
+     (hugo.IsProduction is true for `hugo` builds, false for `hugo server`),
+     so dev keeps plain, readable, stable-URL assets while a real build
+     strips comments/whitespace and cache-busts via content hash. */}}
+{{ $wallpaper1 := resources.Get "images/wallpaper.svg" }}
+{{ $wallpaper2 := resources.Get "images/wallpaper-2.svg" }}
+{{ $base := resources.Get "css/base.css" }}
+{{ $siteRaw := resources.Get "css/site.css" }}
+
+{{ if hugo.IsProduction }}
+  {{ $wallpaper1 = $wallpaper1 | resources.Minify | resources.Fingerprint }}
+  {{ $wallpaper2 = $wallpaper2 | resources.Minify | resources.Fingerprint }}
+{{ end }}
+
+{{/* site.css references the wallpaper SVGs by URL, so it's a Go template
+     (not plain CSS) executed with those resources' actual permalinks
+     before it's treated as CSS itself. */}}
+{{ $siteData := dict "Wallpaper1" $wallpaper1.RelPermalink "Wallpaper2" $wallpaper2.RelPermalink }}
+{{ $site := $siteRaw | resources.ExecuteAsTemplate "css/site.css" $siteData }}
+
+{{ if hugo.IsProduction }}
+  {{ $base = $base | resources.Minify | resources.Fingerprint }}
+  {{ $site = $site | resources.Minify | resources.Fingerprint }}
+{{ end }}
+
+<link rel="stylesheet" href="{{ $base.RelPermalink }}"{{ with $base.Data.Integrity }} integrity="{{ . }}"{{ end }}>
+<link rel="stylesheet" href="{{ $site.RelPermalink }}"{{ with $site.Data.Integrity }} integrity="{{ . }}"{{ end }}>

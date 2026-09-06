@@ -1,6 +1,6 @@
 baseURL = "https://blog.psiwray.com/"
 locale = "en-us"
-title = "Ψray's Blog"
+title = "Ψray"
 theme = ""
 paginate = 10
 enableRobotsTXT = true

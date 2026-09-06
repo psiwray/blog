@@ -5,12 +5,15 @@
    ========================================================================== */
 
 /* Wallpaper: the same trace/via tile the icon is built from, tiled behind
-   the whole page — see static/images/wallpaper.svg. Longhand so it layers
+   the whole page — see assets/images/wallpaper.svg. Longhand so it layers
    on top of base.css's `background: var(--color-paper)` shorthand rather
    than fighting it (shorthand order in the cascade doesn't matter, only
-   per-property specificity/order does). */
+   per-property specificity/order does). The two URLs are Go template
+   placeholders, not literal paths — this file is run through
+   resources.ExecuteAsTemplate (see head.html) so they resolve to the
+   wallpaper resources' actual (possibly fingerprinted) permalinks. */
 body {
-  background-image: url("/images/wallpaper.svg"), url("/images/wallpaper-2.svg");
+  background-image: url("{{ .Wallpaper1 }}"), url("{{ .Wallpaper2 }}");
   background-repeat: repeat, repeat;
   background-size: 240px 240px, 340px 340px;
   background-position: 0 0, 70px 45px;
