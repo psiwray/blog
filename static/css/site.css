@@ -1,0 +1,125 @@
+/* ==========================================================================
+   Ψray — site chrome (header / nav / footer)
+   Companion to base.css, which is scoped to rendered Markdown content only.
+   Reuses the same custom properties and via/trace motifs.
+   ========================================================================== */
+
+.site-header {
+  max-width: var(--measure);
+  margin: 0 auto 2.5rem;
+  padding: 0 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.site-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  text-decoration: none;
+  color: var(--color-ink);
+}
+
+.site-brand:hover,
+.site-brand:focus-visible {
+  background: none;
+}
+
+.site-mark {
+  display: block;
+  width: 2rem;
+  height: 2rem;
+}
+
+.site-title {
+  font-family: var(--font-body);
+  font-weight: var(--weight-bold);
+  font-size: 1.25rem;
+  letter-spacing: -0.01em;
+}
+
+.site-nav {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.site-nav a {
+  color: var(--color-trace);
+  text-decoration: none;
+  padding: 0.25em 0.6em;
+}
+
+.site-nav a:hover,
+.site-nav a:focus-visible {
+  color: var(--color-ink);
+  background: var(--color-panel);
+}
+
+.site-nav a + a::before {
+  content: "";
+  display: inline-block;
+  width: 0.4em;
+  height: 0.4em;
+  margin-right: 0.6em;
+  border: 1.5px solid var(--color-trace-soft);
+  border-radius: var(--radius-node);
+  vertical-align: middle;
+}
+
+.site-footer {
+  max-width: var(--measure);
+  margin: 4rem auto 0;
+  padding: 1.5rem 1.5rem 0;
+  border-top: 1px solid var(--color-trace-soft);
+  color: var(--color-trace);
+  font-size: 0.85em;
+  text-align: center;
+}
+
+.post-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.25em;
+}
+
+.post-list li {
+  margin: 0 0 1.75em;
+}
+
+.post-list li::before {
+  display: none;
+}
+
+.post-list h2 {
+  margin: 0 0 0.2em;
+}
+
+.post-list h2 a {
+  text-decoration: none;
+}
+
+.post-list h2 a:hover,
+.post-list h2 a:focus-visible {
+  background: none;
+  text-decoration: underline;
+  text-decoration-color: var(--color-trace-soft);
+}
+
+.post-meta {
+  display: block;
+  color: var(--color-trace);
+  font-size: 0.85em;
+  margin-bottom: 0.4em;
+}
+
+.post-header {
+  margin-bottom: 2rem;
+}
+
+.post-header h1 {
+  margin-bottom: 0.3em;
+}

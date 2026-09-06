@@ -1,0 +1,15 @@
+{{ define "main" }}
+{{ if not .IsHome }}<h1>{{ .Title }}</h1>{{ end }}
+{{ .Content }}
+<ul class="post-list">
+  {{ range .Pages }}
+  <li>
+    <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+    {{ if not .Date.IsZero }}
+    <span class="post-meta">{{ .Date.Format "January 2, 2006" }}</span>
+    {{ end }}
+    {{ if .Description }}<p>{{ .Description }}</p>{{ else }}<p>{{ .Summary }}</p>{{ end }}
+  </li>
+  {{ end }}
+</ul>
+{{ end }}

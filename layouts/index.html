@@ -1,0 +1,17 @@
+{{ define "main" }}
+{{ with .Content }}{{ . }}{{ end }}
+<h2>Latest posts</h2>
+<ul class="post-list">
+  {{ range first 10 (where .Site.RegularPages "Section" "posts") }}
+  <li>
+    <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+    {{ if not .Date.IsZero }}
+    <span class="post-meta">{{ .Date.Format "January 2, 2006" }}</span>
+    {{ end }}
+    {{ if .Description }}<p>{{ .Description }}</p>{{ else }}<p>{{ .Summary }}</p>{{ end }}
+  </li>
+  {{ else }}
+  <li><p>No posts yet.</p></li>
+  {{ end }}
+</ul>
+{{ end }}

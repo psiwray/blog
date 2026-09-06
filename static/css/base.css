@@ -1,0 +1,406 @@
+/* ==========================================================================
+   Ψray — base stylesheet
+   ==========================================================================
+   Visual identity: a serif Ψ (the "ancient letterform") traced by thin
+   monochrome circuit-board lines and open "via" nodes. Everything here
+   stays black/white/gray on purpose — the mark itself has no color accent,
+   so the page shouldn't invent one. The two signature touches carried
+   through the type are: (1) hollow-ring "via" markers standing in for
+   bullets/dividers, and (2) hairline "trace" rules instead of heavy borders.
+
+   Scope: rules are written on bare elements (h1–h6, p, a, ul/ol, blockquote,
+   code/pre, hr, img, table…) so they apply wherever your SSG drops rendered
+   Markdown. If your SSG wraps posts in a container (e.g. <article>,
+   .content, .post-body), you can either leave this as-is (it'll just apply
+   site-wide) or prefix every selector below with that class.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. Custom properties — this is the only section you need to touch to
+      reskin fonts or the palette.
+   -------------------------------------------------------------------------- */
+:root {
+  /* --- Type: swap these three once you've picked a typeface ---
+     The mark's Ψ is a classic serif with slab-like terminals, so the
+     fallback stack below leans serif. Point --font-body at your chosen
+     family; regular/bold/italic are pulled in via normal CSS font-weight
+     and font-style, so as long as your font file (or @font-face below)
+     provides those three faces, everything downstream just works. */
+  --font-body: Georgia, 'Times New Roman', Times, serif;
+  --font-mono: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+
+  --weight-regular: 400;
+  --weight-bold: 700;
+
+  /* --- Palette: pure black/white/gray, matching the mark exactly --- */
+  --color-paper: #ffffff;   /* page background */
+  --color-ink: #0d0d0d;     /* body text, headings, glyph fills */
+  --color-trace: #58595b;   /* mid-gray circuit line */
+  --color-trace-soft: #b9b9ba; /* faint dividers, table rules */
+  --color-panel: #f5f5f5;   /* code block / inset background */
+
+  /* --- Scale --- */
+  --measure: 42rem;         /* reading-column max width */
+  --radius-node: 50%;
+}
+
+/* Optional: if/when you have real font files, wire them up here and then
+   just change --font-body above to your family name.
+
+   @font-face {
+     font-family: 'YourFont';
+     src: url('/fonts/YourFont-Regular.woff2') format('woff2');
+     font-weight: 400;
+     font-style: normal;
+     font-display: swap;
+   }
+   @font-face {
+     font-family: 'YourFont';
+     src: url('/fonts/YourFont-Bold.woff2') format('woff2');
+     font-weight: 700;
+     font-style: normal;
+     font-display: swap;
+   }
+   @font-face {
+     font-family: 'YourFont';
+     src: url('/fonts/YourFont-Italic.woff2') format('woff2');
+     font-weight: 400;
+     font-style: italic;
+     font-display: swap;
+   }
+*/
+
+/* --------------------------------------------------------------------------
+   2. Reset & base page rules
+   -------------------------------------------------------------------------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 3rem 1.5rem 6rem;
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  font-weight: var(--weight-regular);
+  font-size: 1.125rem;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body > * {
+  max-width: var(--measure);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+::selection {
+  background: var(--color-ink);
+  color: var(--color-paper);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-ink);
+  outline-offset: 3px;
+}
+
+/* --------------------------------------------------------------------------
+   3. Headings
+   -------------------------------------------------------------------------- */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-body);
+  font-weight: var(--weight-bold);
+  color: var(--color-ink);
+  line-height: 1.2;
+  margin: 2.5em 0 0.6em;
+}
+
+h1 { font-size: 2.25rem; margin-top: 0; letter-spacing: -0.01em; }
+h2 { font-size: 1.7rem; }
+h3 { font-size: 1.35rem; }
+h4 { font-size: 1.15rem; }
+h5, h6 { font-size: 1rem; text-transform: uppercase; letter-spacing: 0.04em; }
+
+/* h2/h3 get a small hollow "via" mark, like a junction on the trace —
+   the one recurring motif from the icon, used sparingly. */
+h2::before,
+h3::before {
+  content: "";
+  display: inline-block;
+  width: 0.5em;
+  height: 0.5em;
+  margin-right: 0.5em;
+  border: 1.5px solid var(--color-ink);
+  border-radius: var(--radius-node);
+  vertical-align: middle;
+  transform: translateY(-0.08em);
+}
+
+h1 + *, h2 + *, h3 + * { margin-top: 0.4em; }
+
+/* --------------------------------------------------------------------------
+   4. Body text & inline emphasis
+   -------------------------------------------------------------------------- */
+p {
+  margin: 0 0 1.25em;
+}
+
+strong, b {
+  font-weight: var(--weight-bold);
+}
+
+em, i {
+  font-style: italic;
+}
+
+mark {
+  background: var(--color-panel);
+  color: var(--color-ink);
+  padding: 0.05em 0.2em;
+}
+
+del, s {
+  text-decoration: line-through;
+  text-decoration-color: var(--color-trace);
+}
+
+small {
+  font-size: 0.85em;
+  color: var(--color-trace);
+}
+
+/* --------------------------------------------------------------------------
+   5. Links
+   -------------------------------------------------------------------------- */
+a {
+  color: var(--color-ink);
+  text-decoration: underline;
+  text-decoration-color: var(--color-trace-soft);
+  text-underline-offset: 0.15em;
+  text-decoration-thickness: 1px;
+  transition: text-decoration-color 0.15s ease, background-color 0.15s ease;
+}
+
+a:hover,
+a:focus-visible {
+  text-decoration-color: var(--color-ink);
+  background: var(--color-panel);
+}
+
+/* --------------------------------------------------------------------------
+   6. Lists — bullets become open circuit nodes, matching the icon's vias
+   -------------------------------------------------------------------------- */
+ul, ol {
+  margin: 0 0 1.25em;
+  padding-left: 1.6em;
+}
+
+li {
+  margin: 0.35em 0;
+}
+
+li::marker {
+  color: var(--color-trace);
+}
+
+ul {
+  list-style: none;
+  padding-left: 1.4em;
+}
+
+ul li {
+  position: relative;
+}
+
+ul li::before {
+  content: "";
+  position: absolute;
+  left: -1.3em;
+  top: 0.55em;
+  width: 0.55em;
+  height: 0.55em;
+  border: 1.5px solid var(--color-ink);
+  border-radius: var(--radius-node);
+  background: var(--color-paper);
+}
+
+ol {
+  list-style: decimal;
+}
+
+ol ol, ul ul, ol ul, ul ol {
+  margin: 0.35em 0 0.35em 0.4em;
+}
+
+/* --------------------------------------------------------------------------
+   7. Blockquote — a single trace running down the left edge, terminating
+      in a via at the top, like a signal being tapped off the board.
+   -------------------------------------------------------------------------- */
+blockquote {
+  position: relative;
+  margin: 1.75em 0;
+  padding: 0.2em 0 0.2em 1.5em;
+  border-left: 2px solid var(--color-trace);
+  font-style: italic;
+  color: var(--color-ink);
+}
+
+blockquote::before {
+  content: "";
+  position: absolute;
+  left: -6px;
+  top: -2px;
+  width: 10px;
+  height: 10px;
+  background: var(--color-paper);
+  border: 1.5px solid var(--color-ink);
+  border-radius: var(--radius-node);
+}
+
+blockquote p:last-child {
+  margin-bottom: 0;
+}
+
+/* --------------------------------------------------------------------------
+   8. Code
+   -------------------------------------------------------------------------- */
+code {
+  font-family: var(--font-mono);
+  font-size: 0.88em;
+  background: var(--color-panel);
+  padding: 0.15em 0.4em;
+  border-radius: 3px;
+}
+
+pre {
+  position: relative;
+  margin: 1.75em 0;
+  padding: 1.1em 1.25em;
+  background: var(--color-panel);
+  border-left: 2px solid var(--color-trace);
+  overflow-x: auto;
+  line-height: 1.5;
+}
+
+pre code {
+  background: none;
+  padding: 0;
+  font-size: 0.85em;
+}
+
+/* corner via, echoing the icon's board-edge terminals */
+pre::before {
+  content: "";
+  position: absolute;
+  top: -6px;
+  left: -6px;
+  width: 10px;
+  height: 10px;
+  background: var(--color-paper);
+  border: 1.5px solid var(--color-ink);
+  border-radius: var(--radius-node);
+}
+
+/* --------------------------------------------------------------------------
+   9. Horizontal rule — a trace line with a via at ~12%, the clearest
+      direct quote of the wallpaper pattern.
+   -------------------------------------------------------------------------- */
+hr {
+  position: relative;
+  height: 1px;
+  margin: 3.5rem 0;
+  border: 0;
+  background: var(--color-trace);
+}
+
+hr::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 12%;
+  width: 9px;
+  height: 9px;
+  background: var(--color-paper);
+  border: 1.5px solid var(--color-ink);
+  border-radius: var(--radius-node);
+  transform: translate(-50%, -50%);
+}
+
+/* --------------------------------------------------------------------------
+   10. Images
+   -------------------------------------------------------------------------- */
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 1.75em auto;
+  border: 1px solid var(--color-trace-soft);
+}
+
+figure {
+  margin: 1.75em 0;
+}
+
+figcaption {
+  margin-top: 0.5em;
+  font-size: 0.85em;
+  color: var(--color-trace);
+  text-align: center;
+}
+
+/* --------------------------------------------------------------------------
+   11. Tables
+   -------------------------------------------------------------------------- */
+table {
+  width: 100%;
+  margin: 1.75em 0;
+  border-collapse: collapse;
+  font-size: 0.95em;
+}
+
+th, td {
+  text-align: left;
+  padding: 0.55em 0.8em;
+  border-bottom: 1px solid var(--color-trace-soft);
+}
+
+thead th {
+  border-bottom: 2px solid var(--color-ink);
+  font-weight: var(--weight-bold);
+}
+
+tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* --------------------------------------------------------------------------
+   12. Misc Markdown leftovers
+   -------------------------------------------------------------------------- */
+kbd {
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  padding: 0.1em 0.4em;
+  border: 1px solid var(--color-trace-soft);
+  border-bottom-width: 2px;
+  border-radius: 3px;
+  background: var(--color-paper);
+}
+
+abbr[title] {
+  text-decoration: underline dotted var(--color-trace);
+  cursor: help;
+}
+
+/* footnote references, if your SSG renders them as <sup><a>) */
+sup a {
+  text-decoration: none;
+  border-bottom: 1px solid var(--color-trace-soft);
+}
