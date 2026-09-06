@@ -1,4 +1,4 @@
-baseURL = "https://blog.psiwray.com/"
+baseURL = "https://psiwray.github.io/blog/"
 locale = "en-us"
 title = "Ψray"
 theme = ""
